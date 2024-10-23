@@ -1,16 +1,17 @@
 import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 
-const PrivateRoutes = () => {
+const PrivateRoute = () => {
     const token=localStorage.getItem('token')
     let verifyUser=false
-    if (token)
+    if(token)
     {
         verifyUser=true
+
     }
   return (
-    verifyUser?<Outlet/>:<Navigate to={'/'}/>
+  verifyUser?<Outlet/>:<Navigate to={'/'}/>
   )
 }
 
-export default PrivateRoutes
+export default PrivateRoute

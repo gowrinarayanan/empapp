@@ -1,18 +1,23 @@
 const express=require('express')
-const app=new express();
-const morgan=require('morgan')
-app.use(morgan('dev'))
-const cors=require('cors')
-app.use(cors())
-const user_route=require('./routes/user')
-const employeeroutes=require('./routes/empRoutes')
-app.use('/employee',employeeroutes);
+const app=express();
+const morgan=require('morgan');
+const mongoose=require('mongoose');
 require('dotenv').config();
 const PORT=process.env.PORT
-require('./db/connection');
+app.use(morgan('dev'))
+app.use(express.json());
+const cors=require('cors')
 
-app.use("/user",user_route)
+require('./db/connection');
+app.use(cors())
+const employeeRoute=require('./routes/employeeRoutes');
+const userRoutes=require('./routes/user')
+app.use('/employee',employeeRoute);
+app.use('/user',userRoutes)
+
+
 
 app.listen(PORT,()=>{
-    console.log(`server is running on the PORT ${PORT}`)
-})
+    console.log(`Server is running on port ${PORT}`);
+
+});

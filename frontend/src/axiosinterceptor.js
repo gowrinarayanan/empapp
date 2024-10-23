@@ -1,18 +1,17 @@
-import axios from "axios";
-
-const axiosinstance=axios.create({
-    baseURL:'https://localhost:3000'
+import axios from 'axios'
+const axiosInstance= axios.create({
+    basicURL:'http://localhost:3000/employee/'
 })
-axiosinstance.interceptors.request.use((config)=>{
+axiosInstance.interceptors.request.use((config)=>{
     const accessToken=localStorage.getItem("token")
-    if (accessToken){
-        if (config){
+    if(accessToken){
+        if(config){
             config.headers.token=accessToken;
         }
     }
     return config;
+
 },(error)=>{
     return Promise.reject(error)
-
 })
-export default axiosinstance;
+export default axiosInstance;
